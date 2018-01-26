@@ -28,8 +28,6 @@ Member (
 	email,
 	dateOfBirth,
 	gender,
-	addressRoad,
-	addressNumber,
 	membershipStatus,
 	comments,
 	password,
@@ -88,8 +86,14 @@ Payment (
 
 /*  Weak EntityTypes  */
 
-Place (districtNo, placeComments, residenceOrOrigin, memberNo)
-	_Primary Key: memberNo, residenceOrOrigin
+Place (
+	districtNo,
+	placeComments,
+	placeType,
+	addressRoad,
+	addressNumber,
+	memberNo)
+	_Primary Key: memberNo, placeType
 	_Foreign Key: memberNo	references Member(memberNo) – LivesIn		NOT NULL	ON UPDATE CASCADE	ON DELETE CASCADE
 	_Foreign Key: districtNo references District (districtNo) – IsInDistrict		NOT NULL	ON UPDATE CASCADE	ON DELETE NO ACTION
 

@@ -29,7 +29,7 @@ CREATE TYPE pay_how AS ENUM (‘cash’, ‘paypal’);
 /* Domain definitions  */
 
 CREATE DOMAIN SimpleDate	AS	date;
-CREATE DOMAIN  DateHour		AS	timestamp(0);
+CREATE DOMAIN DateHour		AS	timestamp(0);
 CREATE DOMAIN Comments		AS	text;
 
 CREATE DOMAIN StructureNumber AS 	smallint;
@@ -99,8 +99,6 @@ CREATE TABLE Member(
 	email					Email						NOT NULL,
 	dateOfBirth		SimpleDate			NOT NULL,
 	gender				Gender					NOT NULL,
-	addressRoad		AddressRoad			NOT NULL,
-	addressNumber	 	AddressNumber,
 	membershipStatus	MembershipStatus	NOT NULL,
 	comments		 	Comments,
 	password		 	Password				NOT NULL,
@@ -130,7 +128,7 @@ CREATE TABLE Country(
 
 
 CREATE TABLE Area(
-	areaNo		PlaceNumber		PRIMARY KEY,
+	areaNo			PlaceNumber	PRIMARY KEY,
 	areaName		PlaceName		NOT NULL UNIQUE,
 	countryNo		PlaceNumber	NOT NULL,
 FOREIGN KEY (countryNo) REFERENCES Country(countryNo) ON UPDATE CASCADE 	ON DELETE RESTRICT
@@ -165,6 +163,8 @@ CREATE TABLE Place(
 	districtNo			PlaceNumber		NOT NULL,
 	placeComments		Comments,
 	placeType				PlaceType			NOT NULL,
+	addressRoad			AddressRoad		NOT NULL,
+	addressNumber	 	AddressNumber,
 	memberNo				MemberNumber	NOT NULL,
 PRIMARY KEY (memberNo, placeType),
 FOREIGN KEY (memberNo) REFERENCES Member(memberNo) ON UPDATE CASCADE 	ON DELETE CASCADE,
