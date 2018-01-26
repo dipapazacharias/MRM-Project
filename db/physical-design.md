@@ -192,7 +192,7 @@ FOREIGN KEY (memberNo) REFERENCES Member(memberNo) ON UPDATE CASCADE 	ON DELETE 
 );
 
 
-CREATE TABLE Has(
+CREATE TABLE HasMembers(
 	memberNo		MemberNumber			NOT NULL,
 	structureNo	StructureNumber		NOT NULL,
 PRIMARY KEY(memberNo, structureNo),

@@ -101,7 +101,7 @@ Place (
 
 /*  Many-to-Many Relationships  */
 
-Has (memberNo, structureNo)
+HasMembers (memberNo, structureNo)
 	_Primary Key: memberNo, structureNo
 	_Foreign Key: memberNo 	references Member(memberNo)		ON UPDATE CASCADE	ON DELETE CASCADE
 	Foreign Key: structureNo 	references Structure(structureNo)		NOT NULL	ON UPDATE CASCADE	ON DELETE NO ACTION
