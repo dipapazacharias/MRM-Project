@@ -144,6 +144,6 @@ DesktopPhone (desktopPhoneNumber, memberNo)
 	_Primary Key:  desktopPhoneNumber
 	_Foreign Key: memberNo	references Member(memberNo)		NOT NULL	ON UPDATE CASCADE	ON DELETE CASCADE
 
-DecisionDocument (docNo, decDocument, meetingNo)
-	_Primary Key: docNo
+DecisionDocument (documentNo, document, meetingNo)
+	_Primary Key: documentNo
 	_Foreign Key: meetingNo	references Meeting(meetingNo)		NOT NULL	ON UPDATE CASCADE	ON DELETE NO ACTION

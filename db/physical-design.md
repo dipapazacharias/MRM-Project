@@ -264,8 +264,8 @@ FOREIGN KEY (memberNo) REFERENCES Member(memberNo) ON UPDATE CASCADE	ON DELETE C
 
 
 CREATE TABLE DecisionDocuments(
-	docNo	 			DocNumber		PRIMARY KEY,
-	decDocument	Document		NOT NULL,
+	documentNo	DocNumber		PRIMARY KEY,
+	document		Document		NOT NULL,
 	meetingNo		MeetingNumber	NOT NULL,
 FOREIGN KEY (meetingNo) REFERENCES Meeting(meetingNo) ON UPDATE CASCADE ON DELETE RESTRICT
 );
