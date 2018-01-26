@@ -126,10 +126,10 @@ IsAbsentIn (memberNo, meetingNo, uponNotification, sameTimeOtherMeeting, absence
 	Foreign Key:  sameTimeOtherMeeting  references Meeting(meetingNo)		ON UPDATE CASCADE	ON DELETE SET NULL
 
 
-ChangedStatus (memberNo, structureNo, dateOfChange, newStatus, reasonOfChange)
-	_PrimaryKey: memberNo, dateOfChange, structureNo
+ChangedMembershipStatus (memberNo, meetingNo, dateOfChange, newStatus, reasonOfChange)
+	_PrimaryKey: memberNo, dateOfChange, meetingNo
 	_Foreign Key: memberNo references Member(memberNo)		NOT NULL	ON UPDATE CASCADE	ON DELETE CASCADE
-	_Foreign Key: structureNo references Structure(structureNo)		NOT NULL	ON UPDATE CASCADE	ON DELETE NO ACTION
+	_Foreign Key: meetingNo references Meeting(meetingNo)		NOT NULL	ON UPDATE CASCADE	ON DELETE NO ACTION
 
 
 

@@ -16,7 +16,7 @@ DATABASE “anasynthesi_onra”
 CREATE TYPE structure_type AS ENUM (‘base’, ‘theme’, ‘local’, ‘central’, ‘topcoord’);
 CREATE TYPE structure_level AS ENUM (‘1’, ‘2’, ‘3’); /* 1-base, theme  2-local */
 CREATE TYPE gender_type AS ENUM (‘F’, ‘M’, ‘T’);
-CREATE TYPE membership AS ENUM (‘member’, ‘friend’, ‘semi_expelled’, ‘expelled’, ‘gone’);
+CREATE TYPE membership AS ENUM (‘member’, ‘friend’, ‘semi_expelled’, ‘expelled’, ‘leaved’);
 CREATE TYPE place_type AS ENUM (‘residence’, ‘origin’, ‘second_origin’);
 CREATE TYPE payment_type AS ENUM (‘fee’, ‘donation’, ‘expense’);
 CREATE TYPE pay_how AS ENUM (‘cash’, ‘paypal’);
@@ -41,39 +41,39 @@ CREATE DOMAIN MemberNumber		AS	integer;
 CREATE DOMAIN MemberName	AS	varchar(35);
 CREATE DOMAIN Email			AS	varchar(30);
 CREATE DOMAIN Gender		AS	gender_type;
-CREATE DOMAIN AddressRoad		AS	varchar(25);
-CREATE DOMAIN AddressNumber		AS	varchar(7);
 CREATE DOMAIN MembershipStatus	AS	membership;
 CREATE DOMAIN Password			AS	varchar(20);
 CREATE DOMAIN ViewLevel			AS	structure_level	DEFAULT ‘1’;
 CREATE DOMAIN Absences			AS	smallint	DEFAULT 0;
 
-CREATE DOMAIN  OccupationNumber	AS	smallint;
-CREATE DOMAIN  OccupationName		AS	varchar(20);
+CREATE DOMAIN OccupationNumber	AS	smallint;
+CREATE DOMAIN OccupationName		AS	varchar(20);
 
-CREATE DOMAIN  SocialGroupNumber 	AS	smallint;
-CREATE DOMAIN  SocialGroupName	AS	varchar(20);
+CREATE DOMAIN SocialGroupNumber 	AS	smallint;
+CREATE DOMAIN SocialGroupName	AS	varchar(20);
 
-CREATE DOMAIN  PlaceNumber	AS	smallint;
-CREATE DOMAIN  PlaceName		AS	varchar(20);
-CREATE DOMAIN  PlaceType		AS	place_type;
+CREATE DOMAIN PlaceNumber	AS	smallint;
+CREATE DOMAIN PlaceName		AS	varchar(20);
+CREATE DOMAIN PlaceType		AS	place_type;
+CREATE DOMAIN AddressRoad		AS	varchar(25);
+CREATE DOMAIN AddressNumber	AS	varchar(7);
 
-CREATE DOMAIN  MeetingNumber	AS	integer;
+CREATE DOMAIN MeetingNumber	AS	integer;
 
 CREATE DOMAIN PaymentNumber 	AS 	integer;
 CREATE DOMAIN PaymentType	AS	payment_type;
 CREATE DOMAIN Amount		AS	integer;
 CREATE DOMAIN PayHow		AS	pay_how;
 
-CREATE DOMAIN  Notification	AS	boolean;
+CREATE DOMAIN Notification	AS	boolean;
 
-CREATE DOMAIN  NewStatus			AS	membership;
+CREATE DOMAIN NewStatus			AS	membership;
 
-CREATE DOMAIN  MobilePhoneNumber 	AS	varchar(15);
-CREATE DOMAIN  DesktopPhoneNumber	AS	varchar(15);
+CREATE DOMAIN MobilePhoneNumber 	AS	varchar(15);
+CREATE DOMAIN DesktopPhoneNumber	AS	varchar(15);
 
-CREATE DOMAIN  DocNumber	AS	integer;
-CREATE DOMAIN  Document		AS	cidr;
+CREATE DOMAIN DocNumber	AS	integer;
+CREATE DOMAIN Document	AS	cidr;
 
 
 
@@ -235,15 +235,15 @@ FOREIGN KEY (sameTimeOtherMeeting) REFERENCES Meeting (meetingNo) 	ON UPDATE CAS
 );
 
 
-CREATE TABLE ChangedStatus(
+CREATE TABLE ChangedMembershipStatus(
 	memberNo		MemberNumber		NOT NULL,
-	structureNo	StructureNumber	NOT NULL,
+	meetingNo		MeetingNumber		NOT NULL,
 	dateOfChange	SimpleDate		NOT NULL,
 	newStatus		NewStatus				NOT NULL,
 	reasonOfChange	Comments		NOT NULL,
-PRIMARY KEY (memberNo, dateOfChange, structureNo),
+PRIMARY KEY (memberNo, dateOfChange, meetingNo),
 FOREIGN KEY (memberNo) REFERENCES Member(memberNo) ON UPDATE CASCADE	ON DELETE CASCADE,
-FOREIGN KEY (structureNo) REFERENCES Structure(structureNo) ON UPDATE CASCADE ON DELETE RESTRICT
+FOREIGN KEY (meetingNo) REFERENCES Meeting(meetingNo) ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
 
